@@ -24,5 +24,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //Route::put('books/{id}', 'BookController@update');
 //Route::delete('books/{id}', 'BookController@destroy');
 
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function ($router) {
+    Route::post('login', 'AuthController@login');
+    Route::post('register', 'AuthController@register');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::get('user-profile', 'AuthController@userProfile');
+});
+
 Route::resource('books', 'BookController');
 Route::resource('Author', 'AuthorController');
