@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\book;
+use JWTAuth;
+
 
 class BookController extends Controller
 {
@@ -100,5 +102,8 @@ class BookController extends Controller
         //
         $buku = book::find($id);
         $buku->delete();
+    }
+    public function __construct() {
+        $this->middleware('auth:api');
     }
 }
